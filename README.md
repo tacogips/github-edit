@@ -4,38 +4,38 @@ A powerful Model Context Protocol (MCP) server that provides AI assistants with 
 
 ## Features
 
-### 🔍 **Comprehensive Search**
-- Search across multiple repositories simultaneously
-- Support for GitHub's advanced search syntax
-- Filter by state, labels, assignees, dates, and more
-- Cursor-based pagination for efficient large result handling
-- Intelligent query optimization based on project type detection
-- Flexible output formatting (light/rich) for different use cases
+### 🔧 **GitHub Repository Management**
+- Create, edit, and manage GitHub issues with comprehensive metadata
+- Create, edit, and manage pull requests with review workflows
+- Advanced project management with GitHub Projects integration
+- Repository administration (milestones, labels, basic configuration)
+- Direct API-based operations for efficient GitHub resource management
 
-### 📊 **Project Management**
-- Access GitHub Projects (beta) with detailed information
-- Track project progress, status, and associated resources
-- Cross-reference between projects, issues, and pull requests
-- Comprehensive author, assignee, and label support
-- Optimized performance with intelligent query strategies
+### 📊 **Advanced Project Management**
+- Update GitHub Projects fields (text, number, date, single/multi-select)
+- Add issues and pull requests to projects with proper linking
+- Manage project item metadata and status tracking
+- Full GitHub Projects (beta) integration with field management
+- Project node ID resolution for GraphQL operations
 
-### 🎯 **Direct Resource Access**
-- Fetch issues and pull requests by URL
-- Get detailed information including comments, reviews, and metadata
-- Access repository information and statistics
-- Timeline events and comprehensive issue tracking
+### 🎯 **Issue & Pull Request Operations**
+- Create, edit, comment on, and manage issue lifecycle
+- Create, edit, comment on, and manage pull request workflows
+- Add/remove assignees, reviewers, labels, and milestones
+- State management (open/closed) with proper transitions
+- Comment editing and management with full versioning
 
-### 🔧 **Profile Management**
-- Organize repositories and projects into profiles
-- Isolate data by profile for different contexts
-- CLI tools for profile and repository management
-- Enhanced CLI help documentation and streamlined display
+### 🔧 **Repository Administration**
+- Create and manage repository milestones with due dates
+- Create, update, and delete repository labels with colors
+- Repository-level configuration and metadata management
+- Direct API access for administrative operations
 
-### 🏗️ **Repository Management**
-- Create, update, and delete milestones
-- Create, update, and delete labels
-- Direct repository configuration through CLI
-- Comprehensive milestone and label management
+### 🏗️ **Transport & Integration**
+- STDIO transport for Claude Desktop integration
+- HTTP/SSE transport for web-based access
+- Model Context Protocol (MCP) 2024-11-05 compliance
+- JSON-RPC 2.0 protocol with proper error handling
 
 ## Installation
 
@@ -77,17 +77,17 @@ export GITHUB_EDIT_GITHUB_TOKEN="ghp_your_token_here"
 
 ### 3. Use CLI Tools
 ```bash
-# Register a repository
-./target/release/github-edit-cli register-repo https://github.com/rust-lang/rust
+# Create a new issue
+./target/release/github-edit-cli issue create -r https://github.com/owner/repo -t "Bug: App crashes" -b "Detailed description..."
 
-# Search for issues with advanced filters
-./target/release/github-edit-cli search "memory leak" --state open --limit 50
+# Add comment to issue
+./target/release/github-edit-cli issue comment -r https://github.com/owner/repo -i 123 -b "I can confirm this bug"
 
-# Get project information with JSON output
-./target/release/github-edit-cli get-project-resources https://github.com/users/username/projects/1 --format json
+# Create a new pull request
+./target/release/github-edit-cli pull-request create -r https://github.com/owner/repo -t "Fix auth bug" --head feature-branch --base main
 
-# List all registered repositories
-./target/release/github-edit-cli list-repos
+# Update project field
+./target/release/github-edit-cli project update-field --project-node-id "PN_xxx" --project-item-id "PVTI_xxx" --project-field-id "PVTF_xxx" --field-type text --value "In Progress"
 ```
 
 ## Claude Desktop Integration
@@ -538,7 +538,7 @@ Update an existing label in a repository.
 
 ## CLI Commands
 
-The GitHub Edit CLI provides comprehensive issue, pull request, project, and repository management capabilities.
+The GitHub Edit CLI provides comprehensive GitHub resource management capabilities focused on editing and updating operations.
 
 ### Issue Management
 ```bash
@@ -583,8 +583,7 @@ github-edit-cli issue remove-milestone -r https://github.com/owner/repo -i 123
 
 ### Pull Request Management
 ```bash
-# Get pull request details
-github-edit-cli pull-request get https://github.com/owner/repo/pull/123
+# Note: pull-request get command is currently disabled
 
 # Create a new pull request
 github-edit-cli pull-request create -r https://github.com/owner/repo -t "Fix auth bug" --head feature-branch --base main
@@ -700,31 +699,29 @@ CARGO_TERM_QUIET=true cargo doc --no-deps
 ## Architecture
 
 ### Core Modules
-- **`github`**: GitHub API client and GraphQL queries with optimized performance
-- **`services`**: Business logic for search, profile management, and data fetching
-- **`tools`**: MCP tool implementations with comprehensive error handling
+- **`github`**: GitHub API client using octocrab with retry logic and rate limiting
+- **`tools`**: MCP tool implementations for issues, PRs, projects, and repositories
 - **`transport`**: MCP server transport layers (stdio, HTTP/SSE)
-- **`formatter`**: Output formatting for markdown and JSON with streamlined display
-- **`types`**: Core data structures and domain models
-- **`bin`**: CLI and MCP server binaries with enhanced help documentation
+- **`types`**: Core data structures and domain models for GitHub entities
+- **`bin`**: CLI and MCP server binaries
+- **`services`**: Business logic layer (available but unused by current implementation)
 
 ### Key Technologies
 - **Rust 2024**: Modern, safe systems programming
 - **Tokio**: Async runtime for high-performance networking
-- **Octocrab**: GitHub API client
+- **Octocrab**: GitHub API client with REST and GraphQL support
 - **rmcp**: Model Context Protocol implementation
-- **Tantivy**: Full-text search engine
 - **Serde**: Serialization framework
+- **Clap**: Command-line argument parsing
 
 ## Performance Features
 
 - **Async/await**: Non-blocking I/O for high concurrency
 - **Connection pooling**: Efficient GitHub API usage with timeout handling
-- **Caching**: Intelligent caching of GitHub data using Tantivy
-- **Pagination**: Cursor-based pagination for efficient large result handling
-- **Rate limiting**: Respects GitHub API limits with intelligent retry logic
-- **Query optimization**: Intelligent query strategy based on project type detection
-- **Performance monitoring**: Comprehensive logging and debugging capabilities
+- **Rate limiting**: Respects GitHub API limits with exponential backoff retry logic
+- **Error handling**: Comprehensive error propagation with anyhow
+- **Authentication**: GitHub Personal Access Token with secure handling
+- **Protocol compliance**: MCP 2024-11-05 with JSON-RPC 2.0
 
 ## Security
 
