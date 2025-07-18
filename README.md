@@ -110,6 +110,388 @@ Add to your Claude Desktop configuration:
 
 ## MCP Tools
 
+### Project Management Tools
+
+#### `update_project_item_field`
+Update a project item field using string parameters. Supports text, number, date, single_select, and multi_select field types.
+
+```json
+{
+  "project_node_id": "PN_kwDOBw6lbs4AAVGQ",
+  "project_item_id": "PVTI_lADOBw6lbs4AAVGQzgF6sCo",
+  "project_field_id": "PVTF_lADOBw6lbs4AAVGQzgF6sCo",
+  "field_type": "text",
+  "value": "In Progress"
+}
+```
+
+#### `get_project_node_id`
+Get project node ID from project identifier.
+
+```json
+{
+  "project_owner": "octocat",
+  "project_number": 1,
+  "project_type": "user"
+}
+```
+
+#### `update_project_item_text_field`
+Update a project item text field.
+
+```json
+{
+  "project_node_id": "PN_kwDOBw6lbs4AAVGQ",
+  "project_item_id": "PVTI_lADOBw6lbs4AAVGQzgF6sCo",
+  "project_field_id": "PVTF_lADOBw6lbs4AAVGQzgF6sCo",
+  "text_value": "Ready for review"
+}
+```
+
+#### `update_project_item_number_field`
+Update a project item number field.
+
+```json
+{
+  "project_node_id": "PN_kwDOBw6lbs4AAVGQ",
+  "project_item_id": "PVTI_lADOBw6lbs4AAVGQzgF6sCo",
+  "project_field_id": "PVTF_lADOBw6lbs4AAVGQzgF6sCo",
+  "number_value": 85
+}
+```
+
+#### `update_project_item_date_field`
+Update a project item date field.
+
+```json
+{
+  "project_node_id": "PN_kwDOBw6lbs4AAVGQ",
+  "project_item_id": "PVTI_lADOBw6lbs4AAVGQzgF6sCo",
+  "project_field_id": "PVTF_lADOBw6lbs4AAVGQzgF6sCo",
+  "date_value": "2024-01-15T10:30:00Z"
+}
+```
+
+#### `update_project_item_single_select_field`
+Update a project item single select field.
+
+```json
+{
+  "project_node_id": "PN_kwDOBw6lbs4AAVGQ",
+  "project_item_id": "PVTI_lADOBw6lbs4AAVGQzgF6sCo",
+  "project_field_id": "PVTF_lADOBw6lbs4AAVGQzgF6sCo",
+  "option_id": "f75ad846"
+}
+```
+
+#### `add_issue_to_project`
+Add an issue to a project.
+
+```json
+{
+  "project_node_id": "PN_kwDOBw6lbs4AAVGQ",
+  "repository_owner": "octocat",
+  "repository_name": "Hello-World",
+  "issue_number": 123
+}
+```
+
+#### `add_pull_request_to_project`
+Add a pull request to a project.
+
+```json
+{
+  "project_node_id": "PN_kwDOBw6lbs4AAVGQ",
+  "repository_owner": "octocat",
+  "repository_name": "Hello-World",
+  "pull_request_number": 456
+}
+```
+
+### Pull Request Management Tools
+
+#### `create_pull_request`
+Create a new pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "title": "Fix authentication bug",
+  "head_branch": "feature-auth-fix",
+  "base_branch": "main",
+  "body": "This PR fixes the authentication bug by...",
+  "draft": false
+}
+```
+
+#### `add_comment_to_pull_request`
+Add a comment to a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "body": "LGTM! Great work on this fix."
+}
+```
+
+#### `edit_comment_on_pull_request`
+Edit an existing pull request comment.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "comment_number": 456,
+  "body": "Updated comment with clarification..."
+}
+```
+
+#### `close_pull_request`
+Close a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123
+}
+```
+
+#### `edit_pull_request_title`
+Edit the title of a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "title": "Updated: Fix authentication bug with OAuth flow"
+}
+```
+
+#### `edit_pull_request_body`
+Edit the body of a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "body": "Updated implementation with performance improvements..."
+}
+```
+
+#### `add_assignees_to_pull_request`
+Add assignees to a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "new_assignees": ["user1", "user2"]
+}
+```
+
+#### `remove_assignees_from_pull_request`
+Remove assignees from a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "assignees": ["user1", "user2"]
+}
+```
+
+#### `add_requested_reviewers_to_pull_request`
+Add requested reviewers to a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "new_reviewers": ["reviewer1", "reviewer2"]
+}
+```
+
+#### `add_labels_to_pull_request`
+Add labels to a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "labels": ["bug", "critical"]
+}
+```
+
+#### `remove_labels_from_pull_request`
+Remove labels from a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "labels": ["bug", "critical"]
+}
+```
+
+#### `add_milestone_to_pull_request`
+Add milestone to a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123,
+  "milestone_number": 5
+}
+```
+
+#### `remove_milestone_from_pull_request`
+Remove milestone from a pull request.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "pr_number": 123
+}
+```
+
+### Issue Management Tools
+
+#### `create_issue`
+Create a new issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "title": "Bug: Application crashes on startup",
+  "body": "When I run the application with...",
+  "assignees": ["user1", "user2"],
+  "labels": ["bug", "critical"],
+  "milestone_number": 1
+}
+```
+
+#### `add_comment_to_issue`
+Add a comment to an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "body": "I can confirm this bug on macOS 13.2"
+}
+```
+
+#### `edit_comment_on_issue`
+Edit an existing issue comment.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "comment_number": 456,
+  "body": "Updated comment with clarification..."
+}
+```
+
+#### `edit_issue_title`
+Edit the title of an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "title": "Updated: Bug found in authentication module"
+}
+```
+
+#### `edit_issue_body`
+Edit the body of an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "body": "Updated description with reproduction steps..."
+}
+```
+
+#### `update_issue_state`
+Update the state of an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "state": "closed"
+}
+```
+
+#### `add_assignees_to_issue`
+Add assignees to an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "new_assignees": ["user1", "user2"]
+}
+```
+
+#### `remove_assignees_from_issue`
+Remove assignees from an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "assignees": ["user1", "user2"]
+}
+```
+
+#### `add_labels_to_issue`
+Add labels to an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "labels": ["bug", "critical"]
+}
+```
+
+#### `add_milestone_to_issue`
+Add milestone to an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "milestone_number": 1
+}
+```
+
+#### `remove_labels_from_issue`
+Remove labels from an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123,
+  "labels": ["bug", "critical"]
+}
+```
+
+#### `remove_milestone_from_issue`
+Remove milestone from an issue.
+
+```json
+{
+  "repository_url": "https://github.com/owner/repo",
+  "issue_number": 123
+}
+```
+
 ### Repository Management Tools
 
 #### `create_milestone`
@@ -117,10 +499,10 @@ Create a new milestone in a repository.
 
 ```json
 {
-  "repository_id": "owner/repo",
+  "repository_url": "https://github.com/owner/repo",
   "title": "v1.0.0",
   "description": "Initial release",
-  "due_on": "2024-12-31T23:59:59Z",
+  "due_on": "2024-01-15T10:30:00Z",
   "state": "open"
 }
 ```
@@ -130,7 +512,7 @@ Create a new label in a repository.
 
 ```json
 {
-  "repository_id": "owner/repo",
+  "repository_url": "https://github.com/owner/repo",
   "name": "bug",
   "color": "ff0000",
   "description": "Something isn't working"
@@ -142,91 +524,11 @@ Update an existing label in a repository.
 
 ```json
 {
-  "repository_id": "owner/repo",
+  "repository_url": "https://github.com/owner/repo",
   "old_name": "bug",
   "new_name": "critical-bug",
   "color": "ff0000",
   "description": "Critical issue requiring immediate attention"
-}
-```
-
-### `get_project_resources`
-Retrieve detailed project information including associated issues and pull requests with comprehensive pagination support. Use `get_issues_details` and `get_pull_request_details` functions to get more detailed information.
-
-```json
-// Get all projects from profile
-{"project_url": null}
-
-// Get specific project
-{"project_url": "https://github.com/users/username/projects/1"}
-
-// Get project with pagination
-{
-  "project_url": "https://github.com/users/username/projects/1",
-  "after": "cursor_token_here",
-  "first": 50
-}
-```
-
-### `get_issues_details`
-Fetch detailed issue information by GitHub URLs, formatted as markdown with comprehensive details including title, body, labels, assignees, creation/update dates, and all comments with timestamps.
-
-```json
-{
-  "issue_urls": [
-    "https://github.com/owner/repo/issues/123",
-    "https://github.com/owner/repo/issues/456"
-  ]
-}
-```
-
-### `get_pull_request_details`
-Retrieve comprehensive pull request data including reviews and commits, formatted as markdown with comprehensive details including title, body, labels, assignees, creation/update dates, review status, and all comments with timestamps.
-
-```json
-{
-  "pull_request_urls": [
-    "https://github.com/owner/repo/pull/123",
-    "https://github.com/owner/repo/pull/456"
-  ]
-}
-```
-
-### `search_across_repositories`
-Powerful search across multiple repositories with advanced filtering and flexible output formatting. Use `get_issues_details` and `get_pull_request_details` functions to get more detailed information.
-
-```json
-// Basic search (default light format)
-{"query": "authentication bug"}
-
-// Advanced search with filters
-{
-  "query": "is:open label:bug created:>2024-01-01",
-  "repository_id": "https://github.com/owner/repo",
-  "limit": 50
-}
-
-// Search with rich output format (comprehensive details)
-{
-  "query": "memory leak",
-  "output_option": "rich"
-}
-
-// Search with light output format (minimal information)
-{
-  "query": "performance issue",
-  "output_option": "light"
-}
-
-// Paginated search
-{
-  "query": "memory leak",
-  "cursors": [
-    {
-      "repository_id": "https://github.com/owner/repo",
-      "cursor": "cursor_token_here"
-    }
-  ]
 }
 ```
 
@@ -236,73 +538,120 @@ Powerful search across multiple repositories with advanced filtering and flexibl
 
 ## CLI Commands
 
-### Repository Management
+The GitHub Edit CLI provides comprehensive issue, pull request, project, and repository management capabilities.
+
+### Issue Management
 ```bash
-# Register a repository to profile
-github-edit-cli register-repo https://github.com/owner/repo --profile dev
+# Get issue details
+github-edit-cli issue get https://github.com/owner/repo/issues/123
 
-# List registered repositories
-github-edit-cli list-repos --profile dev
+# Create a new issue
+github-edit-cli issue create -r https://github.com/owner/repo -t "Bug: App crashes" -b "Detailed description..."
 
-# Remove repository from profile
-github-edit-cli unregister-repo https://github.com/owner/repo --profile dev
+# Add comment to issue
+github-edit-cli issue comment -r https://github.com/owner/repo -i 123 -b "I can confirm this bug"
 
-# Create a new milestone
-github-edit-cli repository create-milestone -r https://github.com/owner/repo -t "v1.0.0" -d "Initial release"
+# Edit issue title
+github-edit-cli issue edit-title -r https://github.com/owner/repo -i 123 -t "Updated title"
 
-# Update an existing milestone
-github-edit-cli repository update-milestone -r https://github.com/owner/repo -m 1 -t "v1.0.1"
+# Edit issue body
+github-edit-cli issue edit-body -r https://github.com/owner/repo -i 123 -b "Updated description"
 
-# Delete a milestone
-github-edit-cli repository delete-milestone -r https://github.com/owner/repo -m 1
+# Update issue state
+github-edit-cli issue update-state -r https://github.com/owner/repo -i 123 -s closed
 
-# Create a new label
-github-edit-cli repository create-label -r https://github.com/owner/repo -n "bug" -c "ff0000" -d "Something isn't working"
+# Edit issue comment
+github-edit-cli issue edit-comment -r https://github.com/owner/repo -i 123 -c 456 -b "Updated comment"
 
-# Update an existing label
-github-edit-cli repository update-label -r https://github.com/owner/repo -o "bug" -n "critical-bug"
+# Delete issue comment
+github-edit-cli issue delete-comment -r https://github.com/owner/repo -i 123 -c 456
 
-# Delete a label
-github-edit-cli repository delete-label -r https://github.com/owner/repo -n "bug"
+# Add/remove assignees
+github-edit-cli issue add-assignees -r https://github.com/owner/repo -i 123 -a user1,user2
+github-edit-cli issue remove-assignees -r https://github.com/owner/repo -i 123 -a user1,user2
+
+# Remove labels
+github-edit-cli issue remove-labels -r https://github.com/owner/repo -i 123 -l bug,enhancement
+
+# Delete issue
+github-edit-cli issue delete -r https://github.com/owner/repo -i 123
+
+# Set/remove milestone
+github-edit-cli issue set-milestone -r https://github.com/owner/repo -i 123 -m 1
+github-edit-cli issue remove-milestone -r https://github.com/owner/repo -i 123
+```
+
+### Pull Request Management
+```bash
+# Get pull request details
+github-edit-cli pull-request get https://github.com/owner/repo/pull/123
+
+# Create a new pull request
+github-edit-cli pull-request create -r https://github.com/owner/repo -t "Fix auth bug" --head feature-branch --base main
+
+# Add comment to pull request
+github-edit-cli pull-request comment -r https://github.com/owner/repo -p 123 -b "LGTM!"
+
+# Close pull request
+github-edit-cli pull-request close -r https://github.com/owner/repo -p 123
+
+# Edit pull request title/body
+github-edit-cli pull-request edit-title -r https://github.com/owner/repo -p 123 -t "Updated title"
+github-edit-cli pull-request edit-body -r https://github.com/owner/repo -p 123 -b "Updated description"
+
+# Edit/delete pull request comments
+github-edit-cli pull-request edit-comment -r https://github.com/owner/repo -p 123 -c 456 -b "Updated comment"
+github-edit-cli pull-request delete-comment -r https://github.com/owner/repo -p 123 -c 456
+
+# Manage assignees and reviewers
+github-edit-cli pull-request add-assignees -r https://github.com/owner/repo -p 123 -a user1,user2
+github-edit-cli pull-request remove-assignees -r https://github.com/owner/repo -p 123 -a user1,user2
+github-edit-cli pull-request add-reviewers -r https://github.com/owner/repo -p 123 -u reviewer1,reviewer2
+
+# Manage labels
+github-edit-cli pull-request add-labels -r https://github.com/owner/repo -p 123 -l bug,critical
+github-edit-cli pull-request remove-labels -r https://github.com/owner/repo -p 123 -l bug,critical
+
+# Manage milestones
+github-edit-cli pull-request add-milestone -r https://github.com/owner/repo -p 123 -m 5
+github-edit-cli pull-request remove-milestone -r https://github.com/owner/repo -p 123
 ```
 
 ### Project Management
 ```bash
-# Register a project to profile
-github-edit-cli register-project https://github.com/users/username/projects/1 --profile dev
+# Update project field (generic)
+github-edit-cli project update-field --project-node-id "PN_xxx" --project-item-id "PVTI_xxx" --project-field-id "PVTF_xxx" --field-type text --value "In Progress"
 
-# Get project information
-github-edit-cli get-project-resources https://github.com/users/username/projects/1 --format json
+# Update specific field types
+github-edit-cli project update-text-field --project-node-id "PN_xxx" --project-item-id "PVTI_xxx" --project-field-id "PVTF_xxx" --text-value "Ready for review"
+github-edit-cli project update-number-field --project-node-id "PN_xxx" --project-item-id "PVTI_xxx" --project-field-id "PVTF_xxx" --number-value 85
+github-edit-cli project update-date-field --project-node-id "PN_xxx" --project-item-id "PVTI_xxx" --project-field-id "PVTF_xxx" --date-value "2024-12-31T23:59:59Z"
+github-edit-cli project update-single-select-field --project-node-id "PN_xxx" --project-item-id "PVTI_xxx" --project-field-id "PVTF_xxx" --option-id "f75ad846"
+
+# Add items to project
+github-edit-cli project add-issue --project-node-id "PN_xxx" --owner "octocat" --repo "Hello-World" --issue-number 123
+github-edit-cli project add-pull-request --project-node-id "PN_xxx" --owner "octocat" --repo "Hello-World" --pull-request-number 456
 ```
 
-### Search Operations
+### Repository Management
 ```bash
-# Search across all repositories in profile
-github-edit-cli search "memory leak" --state open --limit 20
+# Create milestone
+github-edit-cli repository create-milestone -r https://github.com/owner/repo -t "v1.0.0" -d "Initial release"
 
-# Search in specific repository
-github-edit-cli search "authentication" --repository-url https://github.com/owner/repo
+# Update milestone
+github-edit-cli repository update-milestone -r https://github.com/owner/repo -m 1 -t "v1.0.1"
 
-# Advanced search with multiple filters
-github-edit-cli search "is:open label:bug created:>2024-01-01" --limit 50
+# Delete milestone
+github-edit-cli repository delete-milestone -r https://github.com/owner/repo -m 1
 
-# Get specific issue
-github-edit-cli get-issues https://github.com/owner/repo/issues/123
+# Create label
+github-edit-cli repository create-label -r https://github.com/owner/repo -n "bug" -c "ff0000" -d "Something isn't working"
 
-# Get specific pull request
-github-edit-cli get-pull-requests https://github.com/owner/repo/pull/456
-```
+# Update label
+github-edit-cli repository update-label -r https://github.com/owner/repo -o "bug" -n "critical-bug"
 
-### Profile Management
-```bash
-# List all profiles
-github-edit-cli list-profiles
-
-# Create new profile
-github-edit-cli create-profile work
-
-# Delete profile
-github-edit-cli delete-profile old-profile
+# Delete label
+github-edit-cli repository delete-label -r https://github.com/owner/repo -n "bug"
 ```
 
 ## Configuration
