@@ -989,7 +989,7 @@ impl ServerHandler for GitEditTools {
             },
             capabilities: ServerCapabilities::builder().enable_tools().build(),
             instructions: Some(
-                "GitHub Edit MCP Server - Updates GitHub project item fields".into(),
+                "GitHub Edit MCP Server - Updates GitHub project item fields. Requires GITHUB_EDIT_GITHUB_TOKEN environment variable.".into(),
             ),
         }
     }
